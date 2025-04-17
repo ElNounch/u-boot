@@ -13,6 +13,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: arm-none-eabi-gcc
     - name: configure
       run: CROSS_COMPILE=arm-none-eabi- make transformer_t30_defconfig
     - name: make
