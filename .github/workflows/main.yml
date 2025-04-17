@@ -1,0 +1,19 @@
+name: Cross build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: configure
+      run: CROSS_COMPILE=arm-none-eabi- make transformer_t30_defconfig
+    - name: make
+      run: make
