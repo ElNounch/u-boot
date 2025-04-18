@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: tecolicom/actions-use-apt-tools@v1.6
+      with:
+        tools: gnutls
     - uses: carlosperate/arm-none-eabi-gcc-action@v1
       with:
         path-env-var: ARM_NONE_EABI_GCC_PATH
