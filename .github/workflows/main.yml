@@ -1,4 +1,4 @@
-name: Cross build
+name: Cross build U-Boot for the ASUS Transformer device family
 
 on:
   push:
@@ -8,13 +8,13 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - uses: carlosperate/arm-none-eabi-gcc-action@v1
+      with:
+        path-env-var: ARM_NONE_EABI_GCC_PATH
     - name: configure
-      run: CROSS_COMPILE=arm-none-eabi- make transformer_t30_defconfig
+      run:  CROSS_COMPILE="$[[ ARM_NONE_EABI_GCC_PATH }}/arm-none-eabi-" make transformer_t30_defconfig
     - name: make
       run: make
