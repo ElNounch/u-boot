@@ -17,4 +17,4 @@ jobs:
     - name: configure
       run:  CROSS_COMPILE="$ARM_NONE_EABI_GCC_PATH/arm-none-eabi-" make transformer_t30_defconfig
     - name: make
-      run: make
+      run: CROSS_COMPILE="$ARM_NONE_EABI_GCC_PATH/arm-none-eabi-" make
