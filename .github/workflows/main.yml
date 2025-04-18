@@ -15,6 +15,6 @@ jobs:
       with:
         path-env-var: ARM_NONE_EABI_GCC_PATH
     - name: configure
-      run:  CROSS_COMPILE="${{ ARM_NONE_EABI_GCC_PATH }}/arm-none-eabi-" make transformer_t30_defconfig
+      run:  CROSS_COMPILE="$ARM_NONE_EABI_GCC_PATH/arm-none-eabi-" make transformer_t30_defconfig
     - name: make
       run: make
