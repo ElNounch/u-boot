@@ -21,9 +21,10 @@ jobs:
       run: echo "CROSS_COMPILE=$(echo "$ARM_NONE_EABI_GCC_PATH/arm-none-eabi-")" >> $GITHUB_ENV
     - name: Configure and Build
       run: |
-        make transformer_t30_defconfig
+        make transformer_t30_defconfig tf201.config
         make
     - name: Archive production artifacts
       uses: actions/upload-artifact@v4
       with:
+          name: u-boot-tf201
           path: u-boot-dtb-tegra.bin
