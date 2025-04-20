@@ -17,13 +17,13 @@ jobs:
     - uses: carlosperate/arm-none-eabi-gcc-action@v1.10.0
       with:
         path-env-var: ARM_NONE_EABI_GCC_PATH
-    - name: Configure
-      run:  CROSS_COMPILE="$ARM_NONE_EABI_GCC_PATH/arm-none-eabi-" make transformer_t30_defconfig
-    - name: Make
-      run: CROSS_COMPILE="$ARM_NONE_EABI_GCC_PATH/arm-none-eabi-" make
-    - run: ls -l
+    - name: Set CROSS_COMPILE environment variable
+      run: echo "CROSS_COMPILE=\"$(echo $ARM_NONE_EABI_GCC_PATH/arm-none-eabi-\"" >> $GITHUB_ENV
+    - name: Configure and Build
+      run: |
+        make transformer_t30_defconfig
+        make
     - name: Archive production artifacts
       uses: actions/upload-artifact@v4
       with:
-          name: u-boot-dtb.img
-          path: u-boot-dtb.img
+          path: u-boot-dtb-tegra.bin
