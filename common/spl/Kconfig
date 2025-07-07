@@ -96,6 +96,7 @@ config SPL_MAX_SIZE
 
 config SPL_PAD_TO
 	hex "Offset to which the SPL should be padded before appending the SPL payload"
+	default 0x7f8000 if ARCH_ROCKCHIP
 	default 0x31000 if ARCH_MX6 && MX6_OCRAM_256KB
 	default 0x11000 if ARCH_MX7 || (ARCH_MX6 && !MX6_OCRAM_256KB)
 	default 0x10000 if ARCH_KEYSTONE
@@ -270,6 +271,8 @@ config SPL_TEXT_BASE
 	default 0x40200000 if OMAP34XX
 	default 0x402F4000 if AM43XX
 	default 0x402F0400 if AM33XX
+	default 0x80080000 if ARCH_K3 && ARM64
+	default 0x43c00000 if ARCH_K3 && !ARM64
 	default 0x00908000 if ARCH_MX6
 	default 0x00912000 if ARCH_MX7
 	default 0x40301350 if OMAP54XX
@@ -360,6 +363,12 @@ config SPL_LOAD_IMX_CONTAINER
 	help
 	  Support booting U-Boot from an i.MX8 container image. If you are not
 	  using i.MX8, say 'n'.
+
+config SPL_IMX_CONTAINER_USE_TRAMPOLINE
+	bool
+	depends on SPL
+	help
+	  Enable SPL load reader to load data to a trampoline buffer.
 
 config IMX_CONTAINER_CFG
 	string "i.MX8 Container config file"
@@ -964,6 +973,21 @@ config SPL_NAND_SUPPORT
 	  can be used to allow SPL to load U-Boot from supported devices.
 	  This enables the drivers in drivers/mtd/nand/raw as part of an SPL
 	  build.
+
+config SPL_NAND_RAW_U_BOOT_USE_SECTOR
+	bool "NAND raw mode: by sector"
+	depends on SPL_NAND_SUPPORT
+	select SPL_LOAD_BLOCK
+	help
+	  Use sector number for specifying U-Boot location on NAND in
+	  raw mode.
+
+config SPL_NAND_RAW_U_BOOT_SECTOR
+	hex "Address on the NAND to load U-Boot from"
+	depends on SPL_NAND_RAW_U_BOOT_USE_SECTOR
+	help
+	  Address on the NAND to load U-Boot from, when the NAND is being used
+	  in raw mode. Units: NAND disk sectors (1 sector = 512 bytes).
 
 config SPL_NAND_RAW_ONLY
 	bool "Support to boot only raw u-boot.bin images"

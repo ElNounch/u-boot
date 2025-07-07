@@ -509,7 +509,7 @@ static int initr_boot_led_on(void)
 	return 0;
 }
 
-#if defined(CONFIG_CMD_NET)
+#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
 static int initr_net(void)
 {
 	puts("Net:   ");
@@ -639,7 +639,7 @@ static void initcall_run_r(void)
 #if CONFIG_IS_ENABLED(CONSOLE_RECORD)
 	INITCALL(console_record_init);
 #endif
-#if CONFIG_IS_ENABLED(SYS_NONCACHED_MEMORY)
+#if CONFIG_IS_ENABLED(SYS_HAS_NONCACHED_MEMORY)
 	INITCALL(noncached_init);
 #endif
 	INITCALL(initr_of_live);
@@ -779,7 +779,7 @@ static void initcall_run_r(void)
 #if CONFIG_IS_ENABLED(PCI_ENDPOINT)
 	INITCALL(pci_ep_init);
 #endif
-#if CONFIG_IS_ENABLED(CMD_NET)
+#if CONFIG_IS_ENABLED(NET) || CONFIG_IS_ENABLED(NET_LWIP)
 	WATCHDOG_RESET();
 	INITCALL(initr_net);
 #endif
@@ -815,7 +815,9 @@ void board_init_r(gd_t *new_gd, ulong dest_addr)
 	if (CONFIG_IS_ENABLED(X86_64) && !IS_ENABLED(CONFIG_EFI_APP))
 		arch_setup_gd(new_gd);
 
-#if !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64)
+#if defined(CONFIG_RISCV)
+	set_gd(new_gd);
+#elif !defined(CONFIG_X86) && !defined(CONFIG_ARM) && !defined(CONFIG_ARM64)
 	gd = new_gd;
 #endif
 	gd->flags &= ~GD_FLG_LOG_READY;

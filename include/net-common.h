@@ -471,6 +471,9 @@ static inline struct in_addr env_get_ip(char *var)
 
 int net_init(void);
 
+/* Called when a network operation fails to know if it should be re-tried */
+int net_start_again(void);
+
 /* NET compatibility */
 enum proto_t;
 int net_loop(enum proto_t protocol);
@@ -489,6 +492,18 @@ int net_loop(enum proto_t protocol);
  * not found
  */
 int dhcp_run(ulong addr, const char *fname, bool autoload);
+
+
+/**
+ * do_ping - Run the ping command
+ *
+ * @cmdtp: Unused
+ * @flag: Command flags (CMD_FLAG_...)
+ * @argc: Number of arguments
+ * @argv: List of arguments
+ * Return: result (see enum command_ret_t)
+ */
+int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
 
 /**
  * do_tftpb - Run the tftpboot command
@@ -555,6 +570,7 @@ enum wget_http_method {
  *			Filled by client.
  * @hdr_cont_len:	content length according to headers. Filled by wget
  * @headers:		buffer for headers. Filled by wget.
+ * @silent:		do not print anything to the console. Filled by client.
  */
 struct wget_http_info {
 	enum wget_http_method method;
@@ -565,6 +581,7 @@ struct wget_http_info {
 	bool check_buffer_size;
 	u32 hdr_cont_len;
 	char *headers;
+	bool silent;
 };
 
 extern struct wget_http_info default_wget_info;

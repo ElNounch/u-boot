@@ -86,6 +86,7 @@ dtb-$(CONFIG_ARCH_TEGRA) += \
 	tegra20-asus-tf101.dtb \
 	tegra20-asus-tf101g.dtb \
 	tegra20-harmony.dtb \
+	tegra20-lg-star.dtb \
 	tegra20-medcom-wide.dtb \
 	tegra20-motorola-daytona.dtb \
 	tegra20-motorola-olympus.dtb \
@@ -419,6 +420,7 @@ dtb-$(CONFIG_AM33XX) += \
 	am335x-evm.dtb \
 	am335x-evmsk.dtb \
 	am335x-bonegreen.dtb \
+	am335x-bonegreen-eco.dtb \
 	am335x-bonegreen-wireless.dtb \
 	am335x-icev2.dtb \
 	am335x-pocketbeagle.dtb \
@@ -529,17 +531,6 @@ dtb-$(CONFIG_TARGET_SL28) += fsl-ls1028a-kontron-sl28.dtb \
 dtb-$(CONFIG_TARGET_TEN64) += fsl-ls1088a-ten64.dtb
 
 dtb-$(CONFIG_TARGET_STEMMY) += ste-ux500-samsung-stemmy.dtb
-
-dtb-$(CONFIG_STM32F4) += stm32f429-disco.dtb \
-	stm32429i-eval.dtb \
-	stm32f469-disco.dtb
-
-dtb-$(CONFIG_STM32F7) += stm32f746-disco.dtb \
-	stm32f769-disco.dtb \
-	stm32746g-eval.dtb
-dtb-$(CONFIG_STM32H7) += stm32h743i-disco.dtb \
-	stm32h743i-eval.dtb \
-	stm32h750i-art-pi.dtb
 
 dtb-$(CONFIG_MACH_SUN4I) += \
 	sun4i-a10-inet-3f.dtb \
@@ -927,8 +918,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
 	imx8mq-librem5-r4.dtb
 
 dtb-$(CONFIG_ARCH_IMX9) += \
-	imx93-var-som-symphony.dtb \
-	imx93-phyboard-segin.dtb
+	imx93-var-som-symphony.dtb
 
 dtb-$(CONFIG_ARCH_IMXRT) += imxrt1020-evk.dtb \
 	imxrt1170-evk.dtb \
@@ -1087,28 +1077,8 @@ dtb-$(CONFIG_ASPEED_AST2600) += \
 	ast2600-sbp1.dtb \
 	ast2600-x4tf.dtb
 
-dtb-$(CONFIG_ARCH_STI) += stih410-b2260.dtb
-
-dtb-$(CONFIG_STM32MP13X) += \
-	stm32mp135f-dk.dtb
-
 dtb-$(CONFIG_STM32MP15X) += \
-	stm32mp157a-dk1.dtb \
-	stm32mp157a-dk1-scmi.dtb \
-	stm32mp157a-icore-stm32mp1-ctouch2.dtb \
-	stm32mp157a-icore-stm32mp1-edimm2.2.dtb \
-	stm32mp157a-microgea-stm32mp1-microdev2.0.dtb \
-	stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dtb \
-	stm32mp157c-dk2.dtb \
-	stm32mp157c-dk2-scmi.dtb \
-	stm32mp157c-ed1.dtb \
-	stm32mp157c-ed1-scmi.dtb \
-	stm32mp157c-ev1.dtb \
-	stm32mp157c-ev1-scmi.dtb \
 	stm32mp157c-odyssey.dtb
-
-dtb-$(CONFIG_STM32MP25X) += \
-	stm32mp257f-ev1.dtb
 
 dtb-$(CONFIG_SOC_K3_AM654) += \
 	k3-am654-r5-base-board.dtb
